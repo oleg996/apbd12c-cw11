@@ -27,4 +27,7 @@ public interface IDbService
     Task<int> CountPrescriptions(int id);
 
     Task AddPrescriptionMedication(PrescriptinonMedicamet pm);
+
+
+    Task<Boolean> DoesPrescriptionMedicationExists(PrescriptinonMedicamet pm);
 }

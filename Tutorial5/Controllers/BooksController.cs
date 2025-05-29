@@ -35,8 +35,13 @@ namespace Tutorial5.Controllers
         public async Task<IActionResult> Add(NewPrescriptionDTO newPrescriptionDTO)
         {
 
+            if (newPrescriptionDTO.Date > newPrescriptionDTO.DueDate)
+                return BadRequest("incorect date");
+
+
+
             if (!await _dbService.DoesPacientExists(newPrescriptionDTO.patient.IdPatient))
-               await _dbService.AddPatient(newPrescriptionDTO.patient);
+                    await _dbService.AddPatient(newPrescriptionDTO.patient);
 
 
 
@@ -60,8 +65,9 @@ namespace Tutorial5.Controllers
             {
                 if (!await _dbService.DoesMedicamesExists(medicament.IdMedicament))
                     return NotFound("medicament with id " + medicament.IdMedicament + " does not exists");
-
-               await _dbService.AddPrescriptionMedication(new PrescriptinonMedicamet() { IdMedicament = medicament.IdMedicament, IdPrescription = pid, Details = medicament.Description, Dose = medicament.Dose, });
+                if(await _dbService.DoesPrescriptionMedicationExists(new PrescriptinonMedicamet() { IdMedicament = medicament.IdMedicament, IdPrescription = pid, Details = medicament.Description, Dose = medicament.Dose}))
+                    return BadRequest("medicament with id " + medicament.IdMedicament + " is already in a prescription");
+               await _dbService.AddPrescriptionMedication(new PrescriptinonMedicamet() { IdMedicament = medicament.IdMedicament, IdPrescription = pid, Details = medicament.Description, Dose = medicament.Dose});
             }
 
 
