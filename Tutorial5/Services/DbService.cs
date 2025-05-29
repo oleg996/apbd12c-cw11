@@ -13,12 +13,6 @@ public class DbService : IDbService
         _context = context;
     }
 
-    public async Task<List<BookWithAuthorsDto>> GetBooks()
-    {
-
-        return null;
-    }
-
     public async Task<List<MedicamentDTO>> GetMedicaments()
     {
         var Medicaments = await _context.Medicaments.Select(e => new MedicamentDTO() { Name = e.Name, Description = e.Description, Type = e.Type }).ToListAsync();

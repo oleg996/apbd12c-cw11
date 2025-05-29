@@ -10,10 +10,10 @@ namespace Tutorial5.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BooksController : ControllerBase
+    public class ReceptsController : ControllerBase
     {
         private readonly IDbService _dbService;
-        public BooksController(IDbService dbService)
+        public ReceptsController(IDbService dbService)
         {
             _dbService = dbService;
         }
