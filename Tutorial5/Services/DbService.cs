@@ -140,7 +140,7 @@ public class DbService : IDbService
     public async Task<Boolean> DoesPrescriptionMedicationExists(PrescriptinonMedicamet pm)
     {
 
-        if (await _context.PrescriptinonMedicamets.Where(p => p.IdMedicament == pm.IdMedicament && pm.IdPrescription == pm.IdPrescription).CountAsync() > 0)
+        if (await _context.PrescriptinonMedicamets.Where(p => p.IdMedicament == pm.IdMedicament && p.IdPrescription == pm.IdPrescription).CountAsync() > 0)
         {
             return true;
         }

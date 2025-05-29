@@ -71,7 +71,7 @@ namespace Tutorial5.Controllers
             }
 
 
-                return Ok(newPrescriptionDTO);
+                return Created();
         }
     }
 }
